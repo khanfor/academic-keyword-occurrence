@@ -58,11 +58,11 @@ def get_range(search_term, start_date, end_date):
 if __name__ == "__main__":
 
     if len(sys.argv) < 3:
-        print "******"
-        print "Academic word relevance"
-        print "******"
-        print ""
-        print "Usage: python term_frequency.py '<search term>' <start date> <end date>"
+        print("******")
+        print("Academic word relevance")
+        print("******")
+        print("")
+        print("Usage: python term_frequency.py '<search term>' <start date> <end date>")
         
     else:
         search_term = sys.argv[1]
