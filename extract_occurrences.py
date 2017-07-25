@@ -2,8 +2,7 @@
 # By: Volker Strobel
 from bs4 import BeautifulSoup
 import urllib
-from urllib2 import Request, build_opener, HTTPCookieProcessor
-from cookielib import MozillaCookieJar
+from urllib.request import urlopen
 import re
 import time
 import sys
@@ -17,9 +16,8 @@ def get_num_results(search_term, start_date, end_date):
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36'
     query_params = { 'q' : search_term, 'as_ylo' : start_date, 'as_yhi' : end_date}
     url = "https://scholar.google.com/scholar?as_vis=1&hl=en&as_sdt=1,5&" + urllib.urlencode(query_params)
-    opener = build_opener()
-    request = Request(url=url, headers={'User-Agent': user_agent})
-    handler = opener.open(request)
+    request = urllib.request.Request(url=url, headers={'User-Agent': user_agent})
+    handler = urllib.request.urlopen(request)
     html = handler.read() 
 
     # Create soup for parsing HTML and extracting the relevant information
@@ -59,11 +57,11 @@ def get_range(search_term, start_date, end_date):
 if __name__ == "__main__":
 
     if len(sys.argv) < 3:
-        print "******"
-        print "Academic word relevance"
-        print "******"
-        print ""
-        print "Usage: python extract_occurrences.py '<search term>' <start date> <end date>"
+        print("******")
+        print("Academic word relevance")
+        print("******")
+        print("")
+        print("Usage: python extract_occurrences.py '<search term>' <start date> <end date>")
         
     else:
         search_term = sys.argv[1]
